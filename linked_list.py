@@ -39,5 +39,8 @@ if __name__ == "__main__":
 	lnkedlist.insert(9)
 	lnkedlist.insert(12)
 	lnkedlist.insert(14)
+	lnkedlist.insert(8)
 	lnkedlist.traverse()
+
+
 
