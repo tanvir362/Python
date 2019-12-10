@@ -60,13 +60,27 @@ class FpGrowthTree:
             self.transactions.append(tran)
             indx = indx + 1
     
-    def generate_tree(self, itm):
-        flg = True
-        for chld in self.Null.child:
-            if itm in chld.item:
-                chld.item[itm] = chld.item[itm] + 1
-            else:
-                flg = False
+    def generate_tree(self):
+    	#transactions is rearranged based on L1
+    	for row in self.transactions:
+    		current = self.Null #start from the root node
+    		found = False
+    		for itm in row:
+    			#checking if itm presents in current nodes's childs
+        		for chld in current.child:
+        			if itm in chld.item:
+        				found = True
+        				chld.item[itm] = chld.item[itm] + 1
+        				current = chld #move to child
+        				break
+        		#create a new child and set sup_cunt 1 if not found
+        		if found != True:
+        			nchild = FpNode()
+        			nchild.item[itm] = 1
+        			current.child.append(nchild)
+        			current = current.child #move to child
+        			self.links[itm].insert(current) #create links
+
 
 
 transactions = []
@@ -89,5 +103,6 @@ L1['I5'] = 2
 
 print(transactions)
 fp_growth_tree = FpGrowthTree(transactions, L1)
+fp_growth_tree.generate_tree()
 print(fp_growth_tree.transactions)
 
