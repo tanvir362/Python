@@ -45,7 +45,7 @@ class FpGrowthTree:
 		self.Null = FpNode()
 		self.transactions = []
 		self.L1 = dict( sorted(L1.items(), key=operator.itemgetter(1), reverse=True))
-		print(self.L1)
+		#print(self.L1)
 		self.links = {}
 		for x in self.L1:
 			self.links[x] = Linkedlist()
@@ -62,10 +62,10 @@ class FpGrowthTree:
 		#transactions is rearranged based on L1
 		for row in self.transactions:
 			current = self.Null #start from the root node
-			found = False
 			for itm in row:
 				#print(itm)
 				#checking if itm presents in current nodes's childs
+				found = False
 				for chld in current.child:
 					if itm in chld.item:
 						found = True
@@ -79,6 +79,14 @@ class FpGrowthTree:
 					current.child.append(nchild)
 					current = nchild #move to child
 					self.links[itm].insert(current) #create links
+
+				print(current.item)
+
+	def traverse_tree(self, node):
+		for chld in node.child:
+			self.traverse_tree(chld)
+
+		print(node.item)
 
 
 transactions = []
@@ -99,9 +107,11 @@ L1['I3'] = 6
 L1['I4'] = 2
 L1['I5'] = 2
 
-print(transactions)
+#print(transactions)
 fp_growth_tree = FpGrowthTree(transactions, L1)
-print(fp_growth_tree.transactions)
+#print(fp_growth_tree.transactions)
 fp_growth_tree.generate_tree()
+print("\nTravarsal:")
+fp_growth_tree.traverse_tree(fp_growth_tree.Null)
 
 
