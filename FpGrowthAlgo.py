@@ -64,7 +64,7 @@ class FpGrowthTree:
 			current = self.Null #start from the root node
 			found = False
 			for itm in row:
-				print(itm)
+				#print(itm)
 				#checking if itm presents in current nodes's childs
 				for chld in current.child:
 					if itm in chld.item:
@@ -77,7 +77,7 @@ class FpGrowthTree:
 					nchild = FpNode()
 					nchild.item[itm] = 1
 					current.child.append(nchild)
-					current = current.child #move to child
+					current = nchild #move to child
 					self.links[itm].insert(current) #create links
 
 
@@ -101,6 +101,7 @@ L1['I5'] = 2
 
 print(transactions)
 fp_growth_tree = FpGrowthTree(transactions, L1)
-fp_growth_tree.generate_tree()
 print(fp_growth_tree.transactions)
+fp_growth_tree.generate_tree()
+
 
