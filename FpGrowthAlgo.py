@@ -34,53 +34,51 @@ class Linkedlist:
 
 
 class FpNode:
-    def __init__(self):
-        self.child = []
-        self.item = {}
+	def __init__(self):
+		self.child = []
+		self.item = {}
 
 
 import operator
 class FpGrowthTree:
-    def __init__(self, transactions, L1):
-        self.Null = FpNode()
-        self.transactions = []
-        self.L1 = dict( sorted(L1.items(), key=operator.itemgetter(1), reverse=True))
-        print(self.L1)
-        self.links = {}
-        for x in self.L1:
-            self.links[x] = Linkedlist()
-        
-        indx = 0
-        for i in transactions:
-            tran = []
-            for x in self.L1:
-                if x in transactions[indx]:
-                    tran.append(x)
-            
-            self.transactions.append(tran)
-            indx = indx + 1
-    
-    def generate_tree(self):
-    	#transactions is rearranged based on L1
-    	for row in self.transactions:
-    		current = self.Null #start from the root node
-    		found = False
-    		for itm in row:
-    			#checking if itm presents in current nodes's childs
-        		for chld in current.child:
-        			if itm in chld.item:
-        				found = True
-        				chld.item[itm] = chld.item[itm] + 1
-        				current = chld #move to child
-        				break
-        		#create a new child and set sup_cunt 1 if not found
-        		if found != True:
-        			nchild = FpNode()
-        			nchild.item[itm] = 1
-        			current.child.append(nchild)
-        			current = current.child #move to child
-        			self.links[itm].insert(current) #create links
-
+	def __init__(self, transactions, L1):
+		self.Null = FpNode()
+		self.transactions = []
+		self.L1 = dict( sorted(L1.items(), key=operator.itemgetter(1), reverse=True))
+		print(self.L1)
+		self.links = {}
+		for x in self.L1:
+			self.links[x] = Linkedlist()
+		indx = 0
+		for i in transactions:
+			tran = []
+			for x in self.L1:
+				if x in transactions[indx]:
+					tran.append(x)
+			self.transactions.append(tran)
+			indx = indx + 1
+	
+	def generate_tree(self):
+		#transactions is rearranged based on L1
+		for row in self.transactions:
+			current = self.Null #start from the root node
+			found = False
+			for itm in row:
+				print(itm)
+				#checking if itm presents in current nodes's childs
+				for chld in current.child:
+					if itm in chld.item:
+						found = True
+						chld.item[itm] = chld.item[itm] + 1
+						current = chld #move to child
+						break
+				#create a new child and set sup_cunt 1 if not found
+				if found != True:
+					nchild = FpNode()
+					nchild.item[itm] = 1
+					current.child.append(nchild)
+					current = current.child #move to child
+					self.links[itm].insert(current) #create links
 
 
 transactions = []
