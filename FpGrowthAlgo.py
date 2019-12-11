@@ -80,13 +80,14 @@ class FpGrowthTree:
 					current = nchild #move to child
 					self.links[itm].insert(current) #create links
 
-				print(current.item)
+				#print(current.item)
 
 	def traverse_tree(self, node):
+		print(node.item)
 		for chld in node.child:
 			self.traverse_tree(chld)
 
-		print(node.item)
+
 
 
 transactions = []
@@ -111,7 +112,7 @@ L1['I5'] = 2
 fp_growth_tree = FpGrowthTree(transactions, L1)
 #print(fp_growth_tree.transactions)
 fp_growth_tree.generate_tree()
-print("\nTravarsal:")
+print("\nDFS travarsal of Fp Growth Tree:")
 fp_growth_tree.traverse_tree(fp_growth_tree.Null)
 
 
