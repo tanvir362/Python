@@ -35,6 +35,7 @@ class Linkedlist:
 
 class FpNode:
 	def __init__(self):
+		self.parent = None
 		self.child = []
 		self.item = {}
 
@@ -48,7 +49,7 @@ class FpGrowthTree:
 		#print(self.L1)
 		self.links = {}
 		for x in self.L1:
-			self.links[x] = Linkedlist()
+			self.links[x] = []
 		indx = 0
 		for i in transactions:
 			tran = []
@@ -77,8 +78,9 @@ class FpGrowthTree:
 					nchild = FpNode()
 					nchild.item[itm] = 1
 					current.child.append(nchild)
+					nchild.parent = current
 					current = nchild #move to child
-					self.links[itm].insert(current) #create links
+					self.links[itm].append(current) #create links
 
 				#print(current.item)
 
@@ -86,6 +88,18 @@ class FpGrowthTree:
 		print(node.item)
 		for chld in node.child:
 			self.traverse_tree(chld)
+
+	def path(self, itm):
+		i = 0
+		for ocrns in self.links[itm]:
+			i = i + 1
+			print("Path of occurrence: {}".format(i))
+			current = ocrns
+			while current.parent.parent != None:
+				print(current.parent.item)
+				current = current.parent
+
+			print()
 
 
 
@@ -114,5 +128,6 @@ fp_growth_tree = FpGrowthTree(transactions, L1)
 fp_growth_tree.generate_tree()
 print("\nDFS travarsal of Fp Growth Tree:")
 fp_growth_tree.traverse_tree(fp_growth_tree.Null)
+fp_growth_tree.path('I3')
 
 
