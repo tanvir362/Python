@@ -10,9 +10,10 @@ class FpGrowthTree:
 	def __init__(self, transactions, L1):
 		self.Null = FpNode()
 		self.transactions = []
-		self.L1 = dict( sorted(L1.items(), key=operator.itemgetter(1), reverse=True))
+		self.L1 = dict( sorted(L1.items(), key=operator.itemgetter(1), reverse=True)) #sorting desc order L1 dictionary based on values
 		#print(self.L1)
 		self.links = {}
+
 		for x in self.L1:
 			self.links[x] = []
 		indx = 0
