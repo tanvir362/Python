@@ -14,7 +14,7 @@ class FpGrowthTree:
 		self.l1 = dict( sorted(L1.items(), key=operator.itemgetter(1))) #sorting asc order L1 dictionary based on values
 		#print(self.L1)
 		self.links = {}
-		self.analysis = {} # dictionary which key'll be a item and value'll be a list of 3 lists. one list is for conditional pattern base, one for conditional fp tree and one for FP generation
+		self.CPattern_base = {}
 
 		for x in self.L1:
 			self.links[x] = []
@@ -57,7 +57,7 @@ class FpGrowthTree:
 		for chld in node.child:
 			self.traverse_tree(chld)
 
-	def genetate_conditional_pattern_base(self, itm):
+	def generate_CPattern_base(self, itm):
 		cp_base = {}
 		for ocrns in self.links[itm]:
 			sup = ocrns.item[itm]
@@ -73,13 +73,13 @@ class FpGrowthTree:
 		return cp_base
 
 
-	def conditional_pattern_base(self):
-		#print(self.analysis)
-		for x in self.analysis:
-			self.analysis[x].append(self.genetate_conditional_pattern_base(x))
+	def prepare_CPattern_base(self):
+		for x in self.CPattern_base:
+			self.CPattern_base[x] = self.generate_CPattern_base(x)
 
 
 	def do_analysis(self):
+		#setting space for non null attacement items
 		for x in self.l1:
 			null_attached = True
 			for ocrns in self.links[x]:
@@ -88,9 +88,9 @@ class FpGrowthTree:
 					break
 
 			if null_attached == False:
-				self.analysis[x]=[]
+				self.CPattern_base[x] = []
 
-		self.conditional_pattern_base()
+		self.prepare_CPattern_base()
 
 
 
@@ -120,6 +120,4 @@ print("\nDFS travarsal of Fp Growth Tree:")
 fp_growth_tree.traverse_tree(fp_growth_tree.Null)
 #fp_growth_tree.path('I3')
 fp_growth_tree.do_analysis()
-print(fp_growth_tree.analysis)
-
-
+print(fp_growth_tree.CPattern_base)
