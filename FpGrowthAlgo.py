@@ -61,14 +61,16 @@ class FpGrowthTree:
 		cp_base = {}
 		for ocrns in self.links[itm]:
 			sup = ocrns.item[itm]
-			itmst = set()
+			itmst = []
 			current = ocrns
 			while current.parent.parent != None:
 				#print(current.parent.item)
-				itmst.add(list(current.parent.item.keys())[0])
+				itmst.append(list(current.parent.item.keys())[0])
 
 				current = current.parent
-			cp_base[frozenset(itmst)] = sup
+			itmst.reverse()
+			if len(itmst) > 0:
+				cp_base[repr(itmst)] = sup
 
 		return cp_base
 
