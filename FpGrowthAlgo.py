@@ -7,14 +7,16 @@ class FpNode:
 
 import operator
 class FpGrowthTree:
-	def __init__(self, transactions, L1):
+	def __init__(self, transactions, L1, min_sup):
 		self.Null = FpNode()
 		self.transactions = []
+		self.min_sup = min_sup
 		self.L1 = dict( sorted(L1.items(), key=operator.itemgetter(1), reverse=True)) #sorting desc order L1 dictionary based on values
 		self.l1 = dict( sorted(L1.items(), key=operator.itemgetter(1))) #sorting asc order L1 dictionary based on values
 		#print(self.L1)
 		self.links = {}
 		self.CPattern_base = {}
+		self.CFP_tree = {}
 
 		for x in self.L1:
 			self.links[x] = []
@@ -80,6 +82,16 @@ class FpGrowthTree:
 			self.CPattern_base[x] = self.generate_CPattern_base(x)
 
 
+	def prepare_CFP_tree(self):
+		for x in self.CFP_tree:
+			brunch = {}
+			for dict_key in self.CPattern_base[x]:
+				brunch[dict_key[0]] = {}
+				
+
+
+
+
 	def do_analysis(self):
 		#setting space for non null attacement items
 		for x in self.l1:
@@ -91,8 +103,10 @@ class FpGrowthTree:
 
 			if null_attached == False:
 				self.CPattern_base[x] = []
+				self.CFP_tree[x] = []
 
 		self.prepare_CPattern_base()
+		self.prepare_CFP_tree()
 
 
 
