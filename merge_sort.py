@@ -18,10 +18,11 @@ def merge(left, right):
 
 def merge_sort(arr):
     divider = int(len(arr)/2)
-    left = arr[:divider]
-    right = arr[divider:]
     
     if divider != 0 :
+        left = arr[:divider]
+        right = arr[divider:]
+        
         return merge(merge_sort(left), merge_sort(right))
     
     return arr
