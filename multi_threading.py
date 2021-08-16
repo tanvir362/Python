@@ -15,23 +15,39 @@ def funb(q, b):
         print(('b', i), file=b, flush=True)
     b.close()
 
+def fun(c, q):
+    for i in range(10):
+        time.sleep(1)
+        q.append((c, i))
+        # print((c, i))
+
+
 
 if __name__ == '__main__':
-    a = open('ato.txt', 'w')
-    b = open('bto.txt', 'w')
+    # a = open('ato.txt', 'w')
+    # b = open('bto.txt', 'w')
 
 
     q = []
     # funa(q)
     # funb(q)
-    t1 = threading.Thread(target=funa, args=[q, a])
-    t1.setDaemon(True)
-    t2 = threading.Thread(target=funb, args=[q, b])
-    t2.setDaemon(True)
+    # t1 = threading.Thread(target=funa, args=[q, a])
+    # t1.setDaemon(True)
+    # t2 = threading.Thread(target=funb, args=[q, b])
+    # t2.setDaemon(True)
 
-    t1.start()
-    t2.start()
+    # t1.start()
+    # t2.start()
     # t1.join()
     # t2.join()
+    thread_q = []
+    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+        t = threading.Thread(target=fun, args=[i, q])
+        t.start()
+        thread_q.append(t)
+        # t.join()
+
+    for t in thread_q:
+        t.join()
 
     print(q)
