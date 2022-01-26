@@ -1,46 +1,54 @@
-class node:
-	def __init__(self, data=None, next_node=None):
+class Node:
+	def __init__(self, data):
 		self.data = data
-		self.next_node = next_node
+		self.next = None
 
-	def get_data(self):
-		return self.data
 
-	def get_next(self):
-		return self.next_node
-
-	def set_data(self, data):
-		self.data = data
-
-	def set_next(self, nxt):
-		self.next_node = nxt
-
-class linkedlist:
+class LinkedList:
 	def __init__(self):
-		self.start = node()
+		self.head = None
+	
+	def add(self, data):
+		if not self.head:
+			self.head = Node(data)
+			return
+		cur = self.head
+		while cur.next:
+			cur = cur.next
+		cur.next = Node(data)
 
-	def insert(self, data):
-		newnd = node(data, self.start.next_node)
-		self.start.set_next(newnd)
-
+	def remove(self, data):
+		if not self.head:
+			return
+		cur = self.head
+		prev = self.head
+		while cur:
+			if cur.data == data:
+				if prev:
+					prev.next = cur.next
+				else :
+					prev = cur.next
+				# cur.next = None
+				return
+			prev = cur
+			cur = cur.next
+	
 	def traverse(self):
-		current = self.start
-		while current.next_node != None:
-			current = current.next_node
-			print(current.data, end=" ")
+		if not self.head:
+			return
+		cur = self.head
+		while cur:
+			print(cur.data, end=" ")
+			cur = cur.next
+		print()
+		
 
-		print("\n")
-			
-if __name__ == "__main__":
-	lnkedlist = linkedlist()
-	lnkedlist.insert(5)
-	lnkedlist.insert(7)
-	lnkedlist.insert(1)
-	lnkedlist.insert(9)
-	lnkedlist.insert(12)
-	lnkedlist.insert(14)
-	lnkedlist.insert(8)
-	lnkedlist.traverse()
+linkedlist = LinkedList()
+for i in range(1, 11):
+	linkedlist.add(i)
 
+linkedlist.traverse()
+linkedlist.remove(1)
+linkedlist.traverse()
 
 
