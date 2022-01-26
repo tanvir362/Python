@@ -1,2 +1,6 @@
 testenv
 images
+google_apiclint_test.py
+send_hugeno_of_request.py
+image_downloader
+Fibonacci.py
