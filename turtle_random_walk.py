@@ -34,12 +34,35 @@ def walk1():
             tl.left(angle)
         else: tl.right(angle)
 
-        print(turn, step, angle)
-        time.sleep(0.5)
+        # print(turn, step, angle)
+        # time.sleep(0.5)
 
         if step == 'forward':
             tl.forward(STEP_LENGTH)
         else: tl.backward(STEP_LENGTH)
+
+
+def walk2(n=1000):
+    x,y = 0,0
+
+    for i in range(n):
+        # dx, dy = random.choice([(1, 0), (-1, 0), (0, 1), (0, -1)])
+        dx, dy = random.choice(
+            [
+                (0, 1),
+                (0, -1),
+                (1, 0),
+                (1, 1),
+                (1, -1),
+                (-1, 0),
+                (-1, 1),
+                (-1, -1)
+            ]
+        )
+        x += dx
+        y += dy
+
+        tl.goto(x*STEP_LENGTH, y*STEP_LENGTH)
 
 
 if __name__ == "__main__":
