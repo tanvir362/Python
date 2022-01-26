@@ -41,7 +41,8 @@ if __name__ == '__main__':
     # t1.join()
     # t2.join()
     thread_q = []
-    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']:
+    st = time.time()
+    for i in ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']:
         t = threading.Thread(target=fun, args=[i, q])
         t.start()
         thread_q.append(t)
@@ -49,5 +50,6 @@ if __name__ == '__main__':
 
     for t in thread_q:
         t.join()
-
+    et = time.time()
     print(q)
+    print(f'Time taken: {round(et-st, 2)} s')
