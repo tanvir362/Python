@@ -30,34 +30,31 @@ class Cell:
         print(f'{self.id} Moving left')
 
         if self.next:
-            print('have next, moving next accordingly')
+            # print('have next, moving next accordingly')
             self.move_adjacent_accordingly()
-        else:
-            print('dont have next')
+        
         self.dir = 'LEFT'
-        print(f'{self.id} Moved left')
+        # print(f'{self.id} Moved left')
 
     def right(self):
         print(f'{self.id} Moving right')
         
         if self.next:
-            print('have next, moving next accordingly')
+            # print('have next, moving next accordingly')
             self.move_adjacent_accordingly()
-        else:
-            print('dont have next')
+        
         self.dir = 'RIGHT'
-        print(f'{self.id} Moved right')
+        # print(f'{self.id} Moved right')
 
     def forward(self):
         print(f'{self.id} Moving forward')
         
         if self.next:
-            print('have next, moving next accordingly')
+            # print('have next, moving next accordingly')
             self.move_adjacent_accordingly()
-        else:
-            print('dont have next')
+        
         self.dir = 'FORWARD'
-        print(f'{self.id} Moved forward')
+        # print(f'{self.id} Moved forward')
 
 
 
