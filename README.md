@@ -1,2 +1,2 @@
 # Python
-My random implementations with Python mostly for fun and experiment. This is a test
+My random implementations with Python mostly for fun and experiment. This is my experimental repo
